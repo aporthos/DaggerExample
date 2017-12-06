@@ -2,8 +2,9 @@ package com.s2next.daggerexample.interactor;
 
 import android.util.Log;
 
-import com.s2next.daggerexample.interfaces.InterIntorLogin;
-import com.s2next.daggerexample.interfaces.InterfaceLogin;
+import com.s2next.daggerexample.interfaces.ContractLogin;
+import com.s2next.daggerexample.interfaces.OnLoginListener;
+import com.s2next.daggerexample.io.InterfaceLogin;
 import com.s2next.daggerexample.utils.Login;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -19,15 +21,17 @@ import io.reactivex.schedulers.Schedulers;
  * Created by amadeusportes on 05/12/17.
  */
 
-public class IntorLogin implements InterIntorLogin {
+public class IntorLogin implements ContractLogin.Interactor {
     private static final String TAG = "IntorLogin";
     InterfaceLogin mInterfaceLogin;
+    CompositeDisposable mCompositeDisposable;
     @Inject
-    public IntorLogin(InterfaceLogin mInterfaceLogin){
+    public IntorLogin(InterfaceLogin mInterfaceLogin, CompositeDisposable mCompositeDisposable){
         this.mInterfaceLogin = mInterfaceLogin;
+        this.mCompositeDisposable = mCompositeDisposable;
     }
     @Override
-    public void intValidateSession(String mUser, String mPassword) {
+    public void intValidateSession(String mUser, String mPassword, final OnLoginListener mOnLoginListener) {
         HashMap<String, Object> mBodyPost = new HashMap<>();
         mBodyPost.put("username", mUser);
         mBodyPost.put("phone", mPassword);
@@ -38,17 +42,15 @@ public class IntorLogin implements InterIntorLogin {
                     @Override
                     public void accept(Login login) throws Exception {
                         Log.i(TAG, "accept: "+login.getToken());
-                        Log.i(TAG, "accept: "+login.getRole());
+                        mOnLoginListener.onSessionInitialized();
                     }
 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAG, "accept: ", throwable);
+                        mOnLoginListener.onDataNotFound();
                     }
                 });
-        Log.i(TAG, "intValidateSession: Hola pinche putita "+mInterfaceLogin);
-
-        //mInterfaceLogin.getLogin();
+        mCompositeDisposable.add(mDisposable);
     }
 }

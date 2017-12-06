@@ -1,9 +1,9 @@
 package com.s2next.daggerexample.di.component;
 
 import com.s2next.daggerexample.MainActivity;
+import com.s2next.daggerexample.di.module.InterfacesLoginModule;
 import com.s2next.daggerexample.di.module.MainActivityModule;
 import com.s2next.daggerexample.di.module.NetModule;
-import com.s2next.daggerexample.interfaces.InterIntorLogin;
 
 import javax.inject.Singleton;
 
@@ -16,10 +16,10 @@ import dagger.android.AndroidInjector;
 @Singleton
 @Subcomponent(modules = {
         MainActivityModule.class,
-        NetModule.class
+        NetModule.class,
+        InterfacesLoginModule.class
     })
 public interface MainActivityComponent extends AndroidInjector<MainActivity> {
     @Subcomponent.Builder
     abstract class Builder extends AndroidInjector.Builder<MainActivity>{}
-    InterIntorLogin mInterIntorLogin();
 }

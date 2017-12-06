@@ -1,4 +1,4 @@
-package com.s2next.daggerexample.interfaces;
+package com.s2next.daggerexample.io;
 
 import com.s2next.daggerexample.utils.Login;
 

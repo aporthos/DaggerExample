@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class NetModule {
     @Provides
-    String privideUrl(){
+    String privideUrl() {
         return "http://team.isdarka.com";
     }
 
@@ -40,7 +40,7 @@ public class NetModule {
         Cache cache = new Cache(application.getCacheDir(), cacheSize);
         return cache;
     }
-    @Provides  // Dagger will only look for methods annotated with @Provides
+    @Provides
     @Singleton
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();

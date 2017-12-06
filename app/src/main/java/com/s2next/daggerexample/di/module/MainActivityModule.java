@@ -1,19 +1,17 @@
 package com.s2next.daggerexample.di.module;
 
-import android.util.Log;
-
 import com.s2next.daggerexample.MainActivity;
 import com.s2next.daggerexample.interactor.IntorLogin;
-import com.s2next.daggerexample.interfaces.InterIntorLogin;
-import com.s2next.daggerexample.interfaces.InterPresLogin;
-import com.s2next.daggerexample.interfaces.InterViewLogin;
-import com.s2next.daggerexample.interfaces.InterfaceLogin;
-import com.s2next.daggerexample.presenter.MainPresenterImpl;
+import com.s2next.daggerexample.interfaces.ContractLogin;
+import com.s2next.daggerexample.io.InterfaceLogin;
+import com.s2next.daggerexample.presenter.PresLogin;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Retrofit;
 
 /**
@@ -22,22 +20,15 @@ import retrofit2.Retrofit;
 @Module(includes = NetModule.class)
 public class MainActivityModule {
     private static final String TAG = "MainActivityModule";
-    @Provides
-    InterViewLogin provideInterViewLogin(MainActivity mainActivity){
-        return mainActivity;
-    }
-    @Provides
-    InterIntorLogin provideInterIntorLogin(InterfaceLogin mInterfaceLogin) {
-        return new IntorLogin(mInterfaceLogin);
-    }
-    @Provides
-    InterPresLogin provideMainPresenter(InterViewLogin mInterViewLogin, InterIntorLogin mInterIntorLogin) {
-        return new MainPresenterImpl(mInterViewLogin, mInterIntorLogin);
-    }
+
+    @Singleton
     @Provides
     InterfaceLogin provideResponseLogin(@Named("Retrofit") Retrofit retrofit) {
-        Log.i(TAG, "provideResponseLogin: "+retrofit);
         return retrofit.create(InterfaceLogin.class);
     }
-
+    @Singleton
+    @Provides
+    CompositeDisposable provideComposite() {
+        return new CompositeDisposable();
+    }
 }
