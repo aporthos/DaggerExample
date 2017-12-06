@@ -5,6 +5,7 @@ import android.app.Application;
 import com.s2next.daggerexample.MainApplication;
 import com.s2next.daggerexample.di.module.AppModule;
 import com.s2next.daggerexample.di.module.NetModule;
+import com.s2next.daggerexample.di.provider.ActivityBuilder;
 
 import dagger.BindsInstance;
 import dagger.Component;

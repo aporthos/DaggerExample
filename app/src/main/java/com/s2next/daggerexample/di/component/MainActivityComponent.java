@@ -1,6 +1,6 @@
 package com.s2next.daggerexample.di.component;
 
-import com.s2next.daggerexample.MainActivity;
+import com.s2next.daggerexample.ui.MainActivity;
 import com.s2next.daggerexample.di.module.InterfacesLoginModule;
 import com.s2next.daggerexample.di.module.MainActivityModule;
 import com.s2next.daggerexample.di.module.NetModule;

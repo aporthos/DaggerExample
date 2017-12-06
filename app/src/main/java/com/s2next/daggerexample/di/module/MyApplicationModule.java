@@ -1,6 +1,6 @@
 package com.s2next.daggerexample.di.module;
 
-import com.s2next.daggerexample.MainActivity;
+import com.s2next.daggerexample.ui.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

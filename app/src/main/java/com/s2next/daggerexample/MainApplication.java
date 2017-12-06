@@ -3,7 +3,6 @@ package com.s2next.daggerexample;
 import android.app.Activity;
 import android.app.Application;
 
-
 import com.s2next.daggerexample.di.component.DaggerMyApplicationComponent;
 
 import javax.inject.Inject;

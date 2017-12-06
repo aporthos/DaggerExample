@@ -1,6 +1,6 @@
 package com.s2next.daggerexample.di.module;
 
-import com.s2next.daggerexample.MainActivity;
+import com.s2next.daggerexample.ui.MainActivity;
 import com.s2next.daggerexample.interactor.IntorLogin;
 import com.s2next.daggerexample.interfaces.ContractLogin;
 import com.s2next.daggerexample.presenter.PresLogin;
